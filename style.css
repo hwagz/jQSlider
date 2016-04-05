@@ -1,0 +1,47 @@
+.container{
+  position: absolute;
+}
+h1 {
+  text-align: center;
+  color: #D1D0CE;
+}
+#slider{
+  width: 720px;
+  height: 400px;
+  overflow: hidden;
+}
+
+#slider .slides{
+  display: block;
+  width: 6000px;
+  height: 400px;
+  margin: 0;
+  padding: 0;
+}
+
+#slider .slide{
+  float: left;
+  list-style-type: none;
+  width: 720px;
+  height: 400px;
+}
+
+#slide1{
+  background-color: aqua;
+}
+
+#slide2{
+  background-color: fuchsia;
+}
+
+#slide3{
+  background-color: red;
+}
+
+#slide4{
+  background-color: orange;
+}
+
+#slide5{
+  background-color: black;
+}
