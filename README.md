@@ -1,0 +1,2 @@
+# jQSlider
+jQuery image slider
