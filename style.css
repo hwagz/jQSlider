@@ -26,6 +26,7 @@ body {
   height: 400px;
 }
 
+
 #slide1{
   background-color: aqua;
 }
@@ -44,4 +45,20 @@ body {
 
 #slide5{
   background-color: black;
+}
+.button{
+  position: absolute;
+  top: 370px;
+  background-color: white;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  z-index: 5;
+
+}
+#RB{
+  left:690px;
+}
+#LB{
+  left: 10px;
 }

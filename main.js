@@ -14,6 +14,8 @@ $(document).ready(function(){
   var $slider = $('#slider');
   var $slideContainer = $slider.find('.slides');
   var $slides = $slideContainer.find('.slide');
+  var $RB = $('#RB');
+  var $LB = $('#LB');
 
 function centerElement(element){
   var desiredx = windowW/2-$(element).width()/2;
@@ -39,6 +41,24 @@ centerElement(container);
   function stopSlider(){
     clearInterval(interval);
   }
+$RB.click(function(){
+  $slideContainer.animate({'margin-left': '-='+width},speed,function(){
+    currentSlide++;
+    if(currentSlide===$slides.length){
+      currentSlide=1;
+      $slideContainer.css('margin-left',0);
+    }})
+});
+$LB.click(function(){
+  //kinda glitchy. needs to be clicked twice first time through
+  $slideContainer.animate({'margin-left': '+='+width},speed,function(){
+    currentSlide--;
+    if(currentSlide<1){
+      currentSlide=$slides.length-2;
+      $slideContainer.css('margin-left',(-720)*currentSlide);
+    }})
+});
+
 
 $slider.on('mouseenter',stopSlider).on('mouseleave',startSlider);
 startSlider();
