@@ -1,11 +1,13 @@
 .container{
   position: absolute;
+
 }
 body {
   text-align: center;
   color: #D1D0CE;
 }
 #slider{
+  background-color: black;
   width: 720px;
   height: 400px;
   overflow: hidden;
