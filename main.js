@@ -1,68 +1,74 @@
-'use strict';
-
 $(document).ready(function(){
-  //config vars
-  var width = 720;
-  var speed = 1000;
-  var pause = 3000;
-  var currentSlide = 1;
-
-  //cache dom
-  var windowW = $(window).width();
-  var windowH = $(window).height();
-  var container = '.container';
-  var $slider = $('#slider');
-  var $slideContainer = $slider.find('.slides');
-  var $slides = $slideContainer.find('.slide');
-  var $RB = $('#RB');
-  var $LB = $('#LB');
-
-function centerElement(element){
-  var desiredx = windowW/2-$(element).width()/2;
-  var desiredy = windowH/2-$(element).height()/2;
-  $(element).css({left: desiredx, top: desiredy});
-}
-
-centerElement(container);
-
-  var interval;
-  function startSlider(){
-    interval = setInterval(function () {
-      $slideContainer.animate({'margin-left': '-='+width},speed,function(){
-        currentSlide++;
-        if(currentSlide===$slides.length){
-          currentSlide=1;
-          $slideContainer.css('margin-left',0);
-        }
-      });
-    }, pause);
-  }
-
-  function stopSlider(){
-    clearInterval(interval);
-  }
-$RB.click(function(){
-  $slideContainer.animate({'margin-left': '-='+width},speed,function(){
-    currentSlide++;
-    if(currentSlide===$slides.length){
-      currentSlide=1;
-      $slideContainer.css('margin-left',0);
-    }})
-});
-$LB.click(function(){
-  //kinda glitchy. needs to be clicked twice first time through
-  $slideContainer.animate({'margin-left': '+='+width},speed,function(){
-    currentSlide--;
-    if(currentSlide<1){
-      currentSlide=$slides.length-2;
-      $slideContainer.css('margin-left',(-720)*currentSlide);
-    }})
-});
+//file:///Users/Hunt/Development/jQSlider/index.html
 
 
-$slider.on('mouseenter',stopSlider).on('mouseleave',startSlider);
-startSlider();
-  //listen for mouseenter and pause
-  //resume on mouseleave
+  (function(){
+    var slider = {
+      fWidth: 720,
+      speed: 1000,
+      pause: 3000,
+      interval: null,
+      currentSlide: 1,
+      init: function(){
+        this.cacheDom();
+        this.bindEvents();
+        this.centerElement(this.$container);
+        this.startSlider();
+      },
+      cacheDom: function(){
+        this.$container = $('.container');
+        this.$windowW = $(window).width();
+        this.$windowH = $(window).height();
+        this.$slider = $('#slider');
+        this.$slideContainer = $('.slides');
+        this.$slides = $('.slide');
+        this.$RB = $('#RB');
+        this.$LB = $('#LB');
+      },
+      centerElement: function($el){
+        var desiredx = this.$windowW/2-$el.width()/2;
+        var desiredy = this.$windowH/2-$el.height()/2;
+        $el.css({left: desiredx, top: desiredy});
+      },
+      bindEvents: function(){
+        this.$slider.on('mouseenter',this.stopSlider.bind(this)).on('mouseleave',this.startSlider.bind(this));
+        this.$RB.on('click',this.rClick.bind(this));
+        this.$LB.on('click',this.lClick.bind(this));
+      },
+      startSlider: function(){
+        this.interval = setInterval(function () {
+          slider.$slideContainer.animate({'margin-left': '-='+slider.fWidth},slider.speed,function(){
+            slider.currentSlide++;
+            if(slider.currentSlide===slider.$slides.length){
+              slider.currentSlide=1;
+              slider.$slideContainer.css('margin-left',0);
+            }
+          });
+        }, this.pause);
+      },
+      stopSlider: function(){
+        clearInterval(this.interval);
+      },
+      rClick: function(){
+        slider.$slideContainer.animate({'margin-left': '-='+slider.fWidth},slider.speed,function(){
+          slider.currentSlide++;
+          if(slider.currentSlide===slider.$slides.length){
+            slider.currentSlide=1;
+            slider.$slideContainer.css('margin-left',0);
+          }
+        })
+      },
+      lClick: function(){
+        slider.$slideContainer.animate({'margin-left': '+='+slider.fWidth},slider.speed,function(){
+          slider.currentSlide--;
+          if(slider.currentSlide<1){
+            slider.currentSlide=slider.$slides.length-2;
+            slider.$slideContainer.css('margin-left',(-1)*slider.fWidth*slider.currentSlide);
+          }
+        })
+      }
+    };
+    slider.init();
+  })()
 
 })
