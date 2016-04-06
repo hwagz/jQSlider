@@ -59,6 +59,7 @@ $(document).ready(function(){
         })
       },
       lClick: function(){
+        //not as DRY as I'd like, but could not get it to work as a single button click function
         slider.$slideContainer.animate({'margin-left': '+='+slider.fWidth},slider.speed,function(){
           slider.currentSlide--;
           if(slider.currentSlide<1){
