@@ -1,8 +1,5 @@
 $(document).ready(function(){
-//file:///Users/Hunt/Development/jQSlider/index.html
 
-
-  (function(){
     var slider = {
       fWidth: 720,
       speed: 1000,
@@ -70,6 +67,5 @@ $(document).ready(function(){
       }
     };
     slider.init();
-  })()
 
 })
